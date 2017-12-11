@@ -7,7 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => {
-  res.send({ 'hello': 'world' });
+  res.send({ 'hello': 'man' });
 });
 
 app.get('/greeting', (req, res) => {
