@@ -1,5 +1,5 @@
 {
-  "name": "molterest",
+  "name": "pinflight-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,17 +8,22 @@
     "npm": "5.6.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^4.0.0",
+    "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.2",
     "mongoose": "^4.13.6",
-    "passport": "^0.4.0"
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0"
   },
   "devDependencies": {
-    "concurrently": "^3.5.1"
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.12.5"
   }
 }
