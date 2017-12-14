@@ -22,4 +22,8 @@ router.get('/logout', requireLogin, (req, res) => {
   res.redirect('/');
 });
 
+router.get('/user', (req, res) => {
+  res.send(req.user);
+});
+
 module.exports = router;
