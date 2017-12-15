@@ -1,21 +1,32 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
+import SearchBar from './SearchBar';
 
-import '../styles/Header.css';
 
 class Header extends Component {
   renderContent() {
-    if (!this.props.auth)
-      return <li><a href="/auth/google">Login with google</a></li>;
+    if (this.props.auth === false)
+      return [
+        <li><Link to="/pins">Pins</Link></li>,
+        <li><a href="/auth/google">Login with google</a></li>
+      ]
+    if (this.props.auth === null)
+      return [<li></li>,<li></li>];
 
-    return <li>It's me maario</li>;
+    return [
+      <li><Link to="/pins">Pins</Link></li>,
+      <li><Link to="/nowhere">It's me maario</Link></li>
+    ]
   }
 
   render() {
     return (
       <header>
-        <h2>PinFlight</h2>
+        <Link to="/"><h2>PinFlight</h2></Link>
+
+        <SearchBar />
         <nav>
           <ul>
             {this.renderContent()}

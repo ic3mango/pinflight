@@ -1,12 +1,17 @@
 const express = require('express');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
 
 const keys = require('./config/keys');
 
 const authRoutes = require('./routes/authRoutes');
+const apiRoutes = require('./routes/apiRoutes');
 
 const app = express();
+
+// populate req.body with form data
+app.use(bodyParser.json());
 
 // initialize cookies
 app.use(cookieSession({
@@ -18,9 +23,11 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// set up authenitcation routes
+// set up routes
 app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
 
+// test routes
 app.get('/', (req, res) => {
   res.send({ 'hello': 'man' });
 });

@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 
-require('./models/User');
-require('./services/passportSetup');
-
 const keys = require('./config/keys');
 
 mongoose.connect(keys.mongoURI, {
   useMongoClient: true
 });
 mongoose.Promise = global.Promise;
+
+// import our models and passport setup
+require('./models/User');
+require('./models/Pin');
+require('./services/passportSetup');
 
 const app = require('./app');
 
