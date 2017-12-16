@@ -10,7 +10,6 @@ mongoose.Promise = global.Promise;
 // import our models and passport setup
 require('./models/User');
 require('./models/Pin');
-require('./services/passportSetup');
 
 const app = require('./app');
 
