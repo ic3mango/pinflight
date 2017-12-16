@@ -5,7 +5,7 @@ const requireLogin = require('../middlewares/requireLogin');
 
 // google authentication
 router.get('/google', passport.authenticate('google', {
-  scope: ['profile']
+  scope: ['profile', 'email']
 }));
 
 router.get('/google/callback',

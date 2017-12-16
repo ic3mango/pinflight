@@ -13,7 +13,11 @@ const pinSchema = new Schema({
     trim: true,
     required: true
   },
-  tags: [String]
+  tags: [String],
+  author: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  }
 }, {
   timestamps: true
 });

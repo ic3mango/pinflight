@@ -19,6 +19,7 @@ router.post('/pin/:id/edit', async (req, res) => {
 });
 
 router.post('/pin', async (req, res) => {
+  req.body.author = req.user._id;
   const pin = await (new Pin(req.body)).save();
 
   res.json(pin);
