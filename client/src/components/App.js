@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from './Header';
 import Landing from './Landing';
 // import Dashboard from './Dashboard';
 import Profile from './Profile';
-import CreateForm from './CreateForm';
-import DisplayPins from './DisplayPins'
+import PinCreate from './PinCreate';
+import PinEdit from './PinEdit';
+import Gallery from './Gallery'
 
 import { fetchUser } from '../actions';
 
@@ -23,8 +24,11 @@ class App extends Component {
           <Header />
           <section className="container-fluid">
             <Route exact path="/" component={Landing} />
-            <Route path="/pins" component={DisplayPins} />
-            <Route path="/pin" component={CreateForm} />
+            <Route path="/gallery" component={Gallery} />
+            <Switch>
+              <Route path="/pin/new" component={PinCreate} />
+              <Route path="/pin/:id" component={PinEdit} />
+            </Switch>
             <Route path="/profile" component={Profile} />
           </section>
         </div>

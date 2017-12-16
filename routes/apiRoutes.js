@@ -18,6 +18,11 @@ router.post('/pin/:id/edit', async (req, res) => {
   ).exec());
 });
 
+router.delete('/pin/:id', async (req, res) => {
+  await Pin.findById(req.params.id).remove().exec();
+  res.send(`pin with id ${id} has been deleted`);
+});
+
 router.post('/pin', async (req, res) => {
   req.body.author = req.user._id;
   const pin = await (new Pin(req.body)).save();
