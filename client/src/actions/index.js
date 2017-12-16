@@ -4,7 +4,8 @@ import {
   CREATE_PIN,
   FETCH_PINS,
   FETCH_PIN,
-  EDIT_PIN
+  EDIT_PIN,
+  CLEAR_PIN
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -31,3 +32,8 @@ export const editPin = (id, pin) => async dispatch => {
   const res = await axios.post(`/api/pin/${id}/edit`, pin);
   dispatch({ type: EDIT_PIN, payload: res.data });
 }
+
+export const clearPin = () => ({
+  type: CLEAR_PIN,
+  payload: null
+});

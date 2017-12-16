@@ -24,6 +24,9 @@ class Gallery extends Component {
   }
 
   render() {
+    if (this.state.loadingBuffer)
+      return <div className="">Loading</div>;
+
     const masonryOptions = {
       transitionDuration: '0.22s',
       itemSelector: '.card',

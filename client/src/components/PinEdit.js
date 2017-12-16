@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
-import { fetchPin } from '../actions';
+import { fetchPin, clearPin } from '../actions';
 import PinForm from './PinForm';
 
 class PinEdit extends Component {
   componentDidMount() {
     this.props.fetchPin(this.props.match.params.id);
+  }
+
+  componentWillUnmount() {
+    this.props.clearPin();
   }
 
   render() {
@@ -27,4 +31,4 @@ const mapStateToProps = ({ pins }) => {
   return { pin: pins.selectedPin }
 }
 
-export default connect(mapStateToProps, { fetchPin })(PinEdit);
+export default connect(mapStateToProps, { fetchPin, clearPin })(PinEdit);

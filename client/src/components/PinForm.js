@@ -48,6 +48,11 @@ class PinForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
+    if (this.state.title.trim() === '' || this.state.imgUrl.trim === '') {
+      alert('title and image url must not be empty');
+      return;
+    }
+
     if (this.props.formType === 'edit')
       this.props.editPin(this.props.pin._id, this.state);
     else if (this.props.formType === 'create')
