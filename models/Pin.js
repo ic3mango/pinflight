@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const pinSchema = new Schema({
-  name: {
+  title: {
     type: String,
     trim: true,
     required: 'name of pin cannot be empty'
@@ -10,7 +10,8 @@ const pinSchema = new Schema({
   description: String,
   imgUrl: {
     type: String,
-    trim: true
+    trim: true,
+    required: true
   },
   tags: [String]
 }, {

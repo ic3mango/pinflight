@@ -27,13 +27,16 @@ app.use(passport.session());
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 
-// test routes
-app.get('/', (req, res) => {
-  res.send({ 'hello': 'man' });
-});
+// serve up react application during production
+if (process.env.NODE_ENV === 'production') {
+  // express will serve up production assets
+  app.use(express.static('client/build'));
 
-app.get('/greeting', (req, res) => {
-  res.end('hi, greetings traveller');
-});
+  // express will serve up index.html file if it does not recognize the route
+  const path = require('path')
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 module.exports = app;

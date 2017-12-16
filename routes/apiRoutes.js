@@ -10,6 +10,14 @@ router.get('/pin/:id', async (req, res) => {
   res.send(await Pin.findById(req.params.id));
 });
 
+router.post('/pin/:id/edit', async (req, res) => {
+  res.json(await Pin.findOneAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    { new: true, runValidators: true }
+  ).exec());
+});
+
 router.post('/pin', async (req, res) => {
   const pin = await (new Pin(req.body)).save();
 
