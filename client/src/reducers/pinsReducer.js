@@ -16,8 +16,7 @@ export default (state = defaultState, action) => {
     case CREATE_PIN:
       return { ...state, allPins: state.allPins.push(action.payload) };
     case EDIT_PIN:
-      console.log(action.payload);
-      return { ...state, allPins: [...state.allPins.filter(p => p._id !== action.payload._id), action.payload ]}
+      return { ...state, allPins: [ action.payload, ...state.allPins.filter(p => p._id !== action.payload._id) ]}
     case FETCH_PINS:
       return { ...state, allPins: [...action.payload] };
     case FETCH_PIN:
