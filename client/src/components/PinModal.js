@@ -45,7 +45,7 @@ const PinModal = (props) => {
 
       <div className="modal-footer d-flex justify-content-between">
         <Link to={`/pin/${pin._id}`} onClick={props.handleEditClick} className="btn btn-primary">Edit</Link>
-        <button className="btn btn-danger">Save</button>
+        <button onClick={() => props.savePin(pin._id)} className="btn btn-danger">Save {this.props.user.saves && this.props.user.saves.length}</button>
       </div>
 
     </ReactModal>

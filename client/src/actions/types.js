@@ -5,3 +5,5 @@ export const CREATE_PIN = 'create_pin';
 export const EDIT_PIN = 'edit_pin';
 export const CLEAR_PIN = 'clear_pin';
 export const SET_ACTIVE_PIN = 'set_active_pin';
+export const SAVE_PIN = 'save_pin';
+export const HIDE_PIN = 'hide_pin';
