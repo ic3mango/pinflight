@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
-import authReducer from './authReducer';
-import pinsReducer from './pinsReducer';
+import auth from './authReducer';
+import pins from './pinsReducer';
+import selectedPin from './selectedPinReducer';
 
 export default combineReducers({
-  auth: authReducer,
-  pins: pinsReducer
+  auth,
+  pins,
+  selectedPin
 });

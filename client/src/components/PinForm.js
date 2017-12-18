@@ -7,19 +7,18 @@ import * as actions from '../actions';
 class PinForm extends Component {
   constructor(props) {
     super(props);
-    if (this.props.formType === 'edit' && this.props.pin) {
-      const { title, imgUrl, tags, description } = this.props.pin;
-      this.state = {
-        title, imgUrl, description, tags
-      }
-    } else {
-      this.state = {
-        title: '',
-        imgUrl: '',
-        description: '',
-        tags: '',
-        like: true,
-      }
+    if (this.props.formType === 'edit') {
+      console.log(this.props.pin);
+      this.state = this.props.pin;
+      return;
+    }
+
+    this.state = {
+      title: '',
+      imgUrl: '',
+      description: '',
+      tags: [],
+      like: true,
     }
   }
 
@@ -48,7 +47,7 @@ class PinForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    if (this.state.title.trim() === '' || this.state.imgUrl.trim === '') {
+    if (this.state.title.trim() === '' || this.state.imgUrl.trim() === '') {
       alert('title and image url must not be empty');
       return;
     }

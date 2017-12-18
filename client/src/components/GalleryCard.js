@@ -1,28 +1,14 @@
 import React, { Component } from 'react'
 
-import fallbackImg from '../assets/images/bombardier_cseries.jpeg';
 import '../assets/styles/GalleryCard.css';
 
 class GalleryCard extends Component {
-  addDefaultImg = (event) => {
-    event.target.src = fallbackImg;
-  }
-
-  hidePinNoPropagate = (e) => {
-    e.stopPropagation();
-    this.props.hidePin();
-  }
-
-  savePinNoPropagate = (e) => {
-    e.stopPropagation();
-    this.props.savePin();
-  }
 
   render() {
     const pin = this.props.pin;
     return (
       <div
-        onClick={() => this.props.goToPin()}
+        onClick={() => this.props.showModal()}
         className="card border-light m-2"
         style={{ width: "270px" }}
       >
@@ -30,15 +16,15 @@ class GalleryCard extends Component {
           className="card-img-top"
           src={pin.imgUrl}
           alt="card"
-          onError={this.addDefaultImg}
+          onError={this.props.addDefaultImg}
         />
         <div className="card-body">
-          <h5 className="card-title">{pin.title}</h5>
+          <h6 className="card-title">{pin.title}</h6>
         </div>
 
         <div className="card-hidden">
-          <button onClick={this.hidePinNoPropagate} className="btn btn-dark m-1">Hide</button>
-          <button onClick={this.savePinNoPropagate} className="btn btn-danger m-1">Save</button>
+          <button onClick={this.props.hidePin} className="btn btn-dark m-1">Hide</button>
+          <button onClick={this.props.savePin} className="btn btn-danger m-1">Save</button>
         </div>
       </div>
     )
