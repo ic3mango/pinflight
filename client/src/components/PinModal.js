@@ -2,6 +2,8 @@ import React from 'react'
 import ReactModal from 'react-modal';
 import { Link } from 'react-router-dom';
 
+import '../assets/styles/PinModal.css';
+
 ReactModal.setAppElement("#root");
 
 const PinModal = (props) => {
@@ -17,7 +19,6 @@ const PinModal = (props) => {
       contentLabel="Pin Modal"
       style={styles.modalStyle}
     >
-
       <div className="modal-header">
         <h5 className="text-center"><strong>{pin.title}</strong></h5>
         <button className="btn btn-info" onClick={props.closeModal}>&times;</button>
@@ -29,7 +30,6 @@ const PinModal = (props) => {
 
           <img className="rounded mr-3 align-self-center"
             src={pin.imgUrl}
-            style={styles.imgStyle}
             alt="hopefully a plane"
             onError={props.addDefaultImg}
           />
@@ -53,10 +53,6 @@ const PinModal = (props) => {
 }
 
 const styles = {
-  imgStyle: {
-    height: "300px",
-    width: "300px"
-  },
   modalStyle: {
     overlay: {
       zIndex: 1050
