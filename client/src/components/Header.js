@@ -19,7 +19,8 @@ class Header extends Component {
     return <React.Fragment>
         <Link className="nav-item nav-link" to="/gallery">Gallery</Link>
         <div className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" // eslint-disable-line jsx-a11y/href-no-hash
+          >
             Profile
           </a>
           <div className="dropdown-menu" aria-labelledby="navbarDropdown">

@@ -27,7 +27,6 @@ class App extends Component {
             <Route path="/gallery" component={Gallery} />
             {
               this.props.auth && <React.Fragment>
-
                 <Switch>
                   <Route path="/pin/new" component={PinCreate} />
                   <Route path="/pin/:id" component={PinEdit} />

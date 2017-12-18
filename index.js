@@ -6,6 +6,7 @@ mongoose.connect(keys.mongoURI, {
   useMongoClient: true
 });
 mongoose.Promise = global.Promise;
+mongoose.set('debug', true);
 
 // import our models and passport setup
 require('./models/User');

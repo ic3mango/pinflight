@@ -6,7 +6,9 @@ import PinForm from './PinForm';
 
 class PinEdit extends Component {
   componentDidMount() {
-    this.props.fetchPin(this.props.match.params.id);
+    if (!this.props.pin) {
+      this.props.fetchPin(this.props.match.params.id);
+    }
   }
 
   componentWillUnmount() {
@@ -14,10 +16,12 @@ class PinEdit extends Component {
   }
 
   render() {
-    if (!this.props.pin) {
-      return <div>Loading...</div>
-    }
     const pin = this.props.pin;
+    
+    if (!pin) {
+      return <div>Pin Not Found</div>
+    }
+
     return (
       <div className="container">
         <h1>Editting pin: <strong>{pin && pin.title}</strong></h1>
@@ -27,8 +31,8 @@ class PinEdit extends Component {
   }
 }
 
-const mapStateToProps = ({ pins }) => {
-  return { pin: pins.selectedPin }
+const mapStateToProps = ({ selectedPin }) => {
+  return { pin: selectedPin }
 }
 
 export default connect(mapStateToProps, { fetchPin, clearPin })(PinEdit);
