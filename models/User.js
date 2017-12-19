@@ -16,7 +16,13 @@ const userSchema = new Schema({
       message: `email is not valid`,
       isAsync: false
     }
-  }
+  },
+  saves: [
+    { type: Schema.ObjectId, ref: 'Pin' }
+  ],
+  hides: [
+    { type: Schema.ObjectId, ref: 'Pin' }
+  ]
 });
 
 mongoose.model('User', userSchema);

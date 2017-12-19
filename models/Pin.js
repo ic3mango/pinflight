@@ -22,4 +22,12 @@ const pinSchema = new Schema({
   timestamps: true
 });
 
+pinSchema.statics.getTagsList = function() {
+  return this.aggregate([
+    { $unwind: "$tags" },
+    { $group: { _id: "$tags", count: { $sum: 1 } } },
+    { $sort: { "count": -1 } },
+  ])
+}
+
 mongoose.model('Pin', pinSchema);

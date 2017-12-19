@@ -7,13 +7,25 @@ import {
   EDIT_PIN,
   CLEAR_PIN,
   SET_ACTIVE_PIN,
+  SAVE_PIN,
+  HIDE_PIN
 } from './types';
 
-/* USER AUTH */
+/* USER */
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/auth/user');
   dispatch({ type: FETCH_USER, payload: res.data });
+}
+
+export const savePin = (id) => async dispatch => {
+  const res = await axios.post(`/api/pin/${id}/save`);
+  dispatch({ type: SAVE_PIN, payload: res.data })
+}
+
+export const hidePin = (id) => async dispatch => {
+  const res = await axios.post(`/api/pin/${id}/hide`);
+  dispatch({ type: HIDE_PIN, payload: res.data });
 }
 
 /* PINS ARRAY */

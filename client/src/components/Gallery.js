@@ -31,15 +31,29 @@ class Gallery extends Component {
       clickHandler();
     }
 
+  userAuthenticated = () => {
+    if (!this.props.user) {
+      this.props.history.push('/login');
+      return false;
+    }
+    return true;
+  }
+
   hidePin = (pinId) => {
-    console.log(pinId);
+    if (!this.userAuthenticated())
+      return;
+    this.props.hidePin(pinId);
   }
 
   savePin = (pinId) => {
-    console.log(pinId);
+    if (!this.userAuthenticated())
+      return;
+    this.props.savePin(pinId);
   }
 
   handleEditClick = () => {
+    if (!this.userAuthenticated())
+      return;
     this.props.setActivePin(this.state.modalPin);
     this.setState(this.defaultState);
   }
@@ -75,6 +89,7 @@ class Gallery extends Component {
               hidePin={this.clickHandlerNoPropagate(() => this.hidePin(pin._id))}
               savePin={this.clickHandlerNoPropagate(() => this.savePin(pin._id))}
               key={pin._id}
+              user={this.props.user}
               pin={pin}
             />
           )}
@@ -84,6 +99,8 @@ class Gallery extends Component {
           isOpen={this.state.showModal}
           closeModal={this.closeModal}
           addDefaultImg={this.addDefaultImg}
+          savePin={this.savePin}
+          user={this.props.user}
           handleEditClick={this.handleEditClick}
         />
       </div>
@@ -91,8 +108,8 @@ class Gallery extends Component {
   }
 }
 
-const mapStateToProps = ({ pins }) => {
-  return { pins }
+const mapStateToProps = ({ pins, auth }) => {
+  return { pins, user: auth }
 }
 
 export default withRouter(connect(mapStateToProps, actions)(Gallery));

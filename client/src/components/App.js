@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import Header from './Header';
 import Landing from './Landing';
+import Login from './Login';
 import Dashboard from './Dashboard';
 import Settings from './Settings';
 import PinCreate from './PinCreate';
@@ -24,6 +25,7 @@ class App extends Component {
           <Header />
           <section className="container-fluid">
             <Route exact path="/" component={Landing} />
+            <Route path="/login" component={Login} />
             <Route path="/gallery" component={Gallery} />
             {
               this.props.auth && <React.Fragment>

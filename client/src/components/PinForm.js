@@ -8,7 +8,6 @@ class PinForm extends Component {
   constructor(props) {
     super(props);
     if (this.props.formType === 'edit') {
-      console.log(this.props.pin);
       this.state = this.props.pin;
       return;
     }
@@ -133,9 +132,19 @@ class PinForm extends Component {
             </label>
           </div>
         }
+        {
+          (this.props.formType === 'edit') &&
+          <button
+            type="button"
+            className="btn btn-danger text-uppercase"
+            onClick={() => alert(this.props.pin._id)}
+          >
+            Delete
+          </button>
+        }
         <button
           type="submit"
-          className="btn btn-primary text-uppercase"
+          className="btn btn-primary text-uppercase float-right"
         >
           {this.props.formType}
         </button>

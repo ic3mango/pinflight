@@ -9,7 +9,6 @@ export default (state = [], action) => {
     case CREATE_PIN:
       return [ { ...action.payload }, ...state ];
     case EDIT_PIN:
-      console.log(state);
       return [ { ...action.payload }, ...state.filter(p => p._id !== action.payload._id) ]
     case FETCH_PINS:
       return [ ...action.payload ];

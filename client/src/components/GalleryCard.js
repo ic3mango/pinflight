@@ -24,7 +24,7 @@ class GalleryCard extends Component {
 
         <div className="card-hidden">
           <button onClick={this.props.hidePin} className="btn btn-dark m-1">Hide</button>
-          <button onClick={this.props.savePin} className="btn btn-danger m-1">Save</button>
+          <button onClick={this.props.savePin} className="btn btn-danger m-1">Save {this.props.user.saves && this.props.user.saves.length}</button>
         </div>
       </div>
     )
