@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Masonry from 'react-masonry-component';
 
-import TagsNavBar from './TagsNavBar';
+import NavBarTags from './NavBarTags';
 import GalleryCard from './GalleryCard';
 import PinModal from './PinModal';
 import * as actions from '../actions';
@@ -87,21 +87,23 @@ class Gallery extends Component {
     };
 
     const hides = (this.props.user && this.props.user.hides) || [];
+    let tags = this.props.tags || [];
+    if (tags.length && tags[0]._id != 'all') {
+      tags.unshift({ _id: 'all', count: tags.reduce((acc, cur) => acc + cur.count, 0)});
+    }
 
     return (
-
-
       <div>
-        <TagsNavBar
+        <NavBarTags
           activeTag={this.state.activeTag}
-          tags={this.props.tags}
+          tags={tags.map(t => t._id)}
           handleTagClick={this.handleTagClick}
         />
         <Masonry
           className="mx-auto"
           options={masonryOptions}
         >
-          {this.props.pins.filter(pin => !hides.includes(pin._id))
+          {this.props.pins.filter(pin => !hides.map(h => h._id).includes(pin._id))
             .filter(pin => this.state.activeTag === 'all' || pin.tags.includes(this.state.activeTag))
             .map(pin =>
             <GalleryCard

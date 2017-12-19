@@ -49,9 +49,6 @@ class GalleryCard extends Component {
               <div className="dropdown-menu" aria-labelledby="shareButtonDropdown">
                 <button className="dropdown-item" onClick={() => this.copyUrl(pin)}>Copy URL</button>
                 <button className="dropdown-item" onClick={() => this.shareTweet(pin)}>Twitter</button>
-                {/* <a className="dropdown-item disabled" href="#">Facebook</a>
-                <a className="dropdown-item disabled" href="#">Snapchat</a>
-                <a className="dropdown-item disabled" href="#">Google</a> */}
               </div>
           </div>
           </div>
@@ -62,7 +59,7 @@ class GalleryCard extends Component {
           >
             {
               user &&
-              user.saves.includes(pin._id.toString()) &&
+              user.saves.map(s => s._id).includes(pin._id.toString()) &&
               <EntypoPin />
             }
             Save
