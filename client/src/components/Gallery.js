@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Masonry from 'react-masonry-component';
 
+import TagsNavBar from './TagsNavBar';
 import GalleryCard from './GalleryCard';
 import PinModal from './PinModal';
 import * as actions from '../actions';
@@ -12,12 +13,14 @@ import fallbackImg from '../assets/images/bombardier_cseries.jpeg';
 class Gallery extends Component {
   defaultState = {
     showModal: false,
-    modalPin: null
+    modalPin: null,
+    activeTag: 'all',
   }
 
   state = this.defaultState;
 
   componentDidMount() {
+    this.props.fetchTags();
     this.props.fetchPins();
   }
 
@@ -51,11 +54,18 @@ class Gallery extends Component {
     this.props.savePin(pinId);
   }
 
-  handleEditClick = () => {
+  handleEditClick = (pinId) => {
     if (!this.userAuthenticated())
       return;
     this.props.setActivePin(this.state.modalPin);
     this.setState(this.defaultState);
+    this.props.history.push(`/pin/${pinId}/edit`);
+  }
+
+  handleTagClick = (activeTag) => {
+    this.setState({
+      activeTag
+    });
   }
 
   showModal = (pin) => {
@@ -76,18 +86,30 @@ class Gallery extends Component {
       fitWidth: true
     };
 
+    const hides = (this.props.user && this.props.user.hides) || [];
+
     return (
+
+
       <div>
+        <TagsNavBar
+          activeTag={this.state.activeTag}
+          tags={this.props.tags}
+          handleTagClick={this.handleTagClick}
+        />
         <Masonry
           className="mx-auto"
           options={masonryOptions}
         >
-          {this.props.pins.map(pin =>
+          {this.props.pins.filter(pin => !hides.includes(pin._id))
+            .filter(pin => this.state.activeTag === 'all' || pin.tags.includes(this.state.activeTag))
+            .map(pin =>
             <GalleryCard
               addDefaultImg={this.addDefaultImg}
               showModal={() => this.showModal(pin)}
               hidePin={this.clickHandlerNoPropagate(() => this.hidePin(pin._id))}
               savePin={this.clickHandlerNoPropagate(() => this.savePin(pin._id))}
+              noPropagate={this.clickHandlerNoPropagate}
               key={pin._id}
               user={this.props.user}
               pin={pin}
@@ -108,8 +130,12 @@ class Gallery extends Component {
   }
 }
 
-const mapStateToProps = ({ pins, auth }) => {
-  return { pins, user: auth }
+const mapStateToProps = ({ pins, auth, tags }) => {
+  return {
+    pins,
+    user: auth,
+    tags
+  };
 }
 
 export default withRouter(connect(mapStateToProps, actions)(Gallery));

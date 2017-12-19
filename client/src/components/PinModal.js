@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactModal from 'react-modal';
-import { Link } from 'react-router-dom';
 
 import '../assets/styles/PinModal.css';
 
@@ -43,11 +42,13 @@ const PinModal = (props) => {
 
       </div>
 
-      <div className="modal-footer d-flex justify-content-between">
-        <Link to={`/pin/${pin._id}`} onClick={props.handleEditClick} className="btn btn-primary">Edit</Link>
-        <button onClick={() => props.savePin(pin._id)} className="btn btn-danger">Save {this.props.user.saves && this.props.user.saves.length}</button>
-      </div>
-
+      {
+        props.user &&
+        <div className="modal-footer d-flex justify-content-between">
+          <button onClick={() => props.handleEditClick(pin._id)} className="btn btn-primary">Edit</button>
+          <button onClick={() => props.savePin(pin._id)} className="btn btn-danger">Save</button>
+        </div>
+      }
     </ReactModal>
   )
 }
