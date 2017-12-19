@@ -17,6 +17,9 @@ const userSchema = new Schema({
       isAsync: false
     }
   },
+  creates: [
+    { type: Schema.ObjectId, ref: 'Pin' }
+  ],
   saves: [
     { type: Schema.ObjectId, ref: 'Pin' }
   ],

@@ -7,6 +7,14 @@ const router = express.Router();
 
 const requireLogin = require('../middlewares/requireLogin');
 
+router.get('/user/populate', requireLogin, async (req, res, next) => {
+  try {
+    res.send(await User.findById(req.user._id).populate("saves hides creates"));
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/pin/:id', async (req, res, next) => {
   try {
     res.send(await Pin.findById(req.params.id));
@@ -37,7 +45,7 @@ router.post('/pin/:id/save', requireLogin, async (req, res, next) => {
      { new: true }
    );
 
-   res.json(user);
+   res.send(user && req.params.id);
   } catch (err) {
    next(err);
   }
@@ -52,7 +60,7 @@ router.post('/pin/:id/hide', requireLogin, async (req, res, next) => {
       { [operator]: { hides: req.params.id } },
       { new: true}
     );
-    res.json(user);
+    res.send(user && req.params.id);
   } catch (err) {
     next(err);
   }
@@ -61,21 +69,25 @@ router.post('/pin/:id/hide', requireLogin, async (req, res, next) => {
 router.delete('/pin/:id', async (req, res, next) => {
   try {
     await Pin.findById(req.params.id).remove().exec();
+    res.send(`pin with id ${id} has been deleted`);
   } catch (err) {
     next(err);
   }
-  res.send(`pin with id ${id} has been deleted`);
+
 });
 
-router.post('/pin', async (req, res, next) => {
+router.post('/pin', requireLogin, async (req, res, next) => {
   req.body.author = req.user._id;
   try {
     const pin = await (new Pin(req.body)).save();
+    User.findByIdAndUpdate(
+      req.body.author,
+      { $addToSet: { creates: pin._id } }
+    );
+    res.json(pin);
   } catch (err) {
     next(err);
   }
-
-  res.json(pin);
 });
 
 router.get('/pins', async (req, res, next) => {
@@ -86,7 +98,7 @@ router.get('/pins', async (req, res, next) => {
   }
 });
 
-router.get('/tags', async (req, res, next) => {
+router.get('/pins/tags', async (req, res, next) => {
   try {
     const pins = await Pin.getTagsList();
     res.json(pins);

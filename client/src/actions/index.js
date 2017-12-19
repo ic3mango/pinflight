@@ -10,6 +10,7 @@ import {
   SAVE_PIN,
   HIDE_PIN,
   FETCH_TAGS,
+  FETCH_USER_ALL_DATA,
 } from './types';
 
 /* USER */
@@ -17,6 +18,11 @@ import {
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/auth/user');
   dispatch({ type: FETCH_USER, payload: res.data });
+}
+
+export const fetchUserAllData = () => async dispatch => {
+  const res = await axios.get('/api/user/populate');
+  dispatch({ type: FETCH_USER_ALL_DATA, payload: res.data });
 }
 
 export const savePin = (id) => async dispatch => {
