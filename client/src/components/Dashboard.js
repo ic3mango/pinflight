@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import * as actions from '../actions';
 import DashboardGallery from './DashboardGallery';
@@ -35,6 +36,7 @@ class Dashboard extends Component {
 
           <div className="media-body">
             <h2 className="mt-0 mb-1">{this.props.user.username}</h2>
+
             <p>
               <span className="text-primary">{this.props.user.creates.length} created pin</span>
               {' '}
@@ -42,6 +44,8 @@ class Dashboard extends Component {
               {' '}
               <span className="d-inline text-secondary">{this.props.user.hides.length} hidden pins</span>
             </p>
+
+            <Link className="badge badge-primary p-2 text-uppercase" to="/pin/new">Create Pin</Link>
           </div>
 
         </div>

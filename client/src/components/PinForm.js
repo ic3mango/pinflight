@@ -51,12 +51,15 @@ class PinForm extends Component {
       return;
     }
 
-    if (this.props.formType === 'edit')
+    if (this.props.formType === 'edit') {
       this.props.editPin(this.props.pin._id, this.state);
-    else if (this.props.formType === 'create')
-      this.props.createPin(this.state);
+      this.props.history.push('/gallery');
+      return;
+    }
 
+    this.props.createPin(this.state);
     this.props.history.push('/gallery');
+    return;
   }
 
   render() {
@@ -123,10 +126,9 @@ class PinForm extends Component {
             <label className="form-check-label">
               <input
                 onChange={this.onChange}
-                value={this.state.like}
                 name="like"
                 type="checkbox"
-                checked
+                checked={this.state.like}
                 className="form-check-input" />
               automatically like created pin
             </label>
@@ -137,7 +139,7 @@ class PinForm extends Component {
           <button
             type="button"
             className="btn btn-danger text-uppercase"
-            onClick={() => alert(this.props.pin._id)}
+            onClick={this.props.handleDelete}
           >
             Delete
           </button>

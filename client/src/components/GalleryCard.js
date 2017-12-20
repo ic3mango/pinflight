@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import { EntypoPin } from 'react-entypo'
 
 import '../assets/styles/GalleryCard.css';
+import fallbackImg from '../assets/images/bombardier_cseries.jpeg';
+
+const addDefaultImg = (event) => {
+  event.target.src = fallbackImg;
+}
+
 
 class GalleryCard extends Component {
   shareTweet = (pin) => {
@@ -33,7 +39,7 @@ class GalleryCard extends Component {
           className="card-img-top"
           src={pin.imgUrl}
           alt="card"
-          onError={this.props.addDefaultImg}
+          onError={addDefaultImg}
         />
         <div className="card-body">
           <h6 className="card-title">{pin.title}</h6>

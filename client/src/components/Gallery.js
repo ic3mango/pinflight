@@ -8,24 +8,22 @@ import GalleryCard from './GalleryCard';
 import PinModal from './PinModal';
 import * as actions from '../actions';
 
-import fallbackImg from '../assets/images/bombardier_cseries.jpeg';
-
 class Gallery extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = this.defaultState;
+  }
+
   defaultState = {
     showModal: false,
     modalPin: null,
     activeTag: 'all',
   }
 
-  state = this.defaultState;
-
   componentDidMount() {
     this.props.fetchTags();
     this.props.fetchPins();
-  }
-
-  addDefaultImg = (event) => {
-    event.target.src = fallbackImg;
   }
 
   clickHandlerNoPropagate = (clickHandler) =>
@@ -57,8 +55,12 @@ class Gallery extends Component {
   handleEditClick = (pinId) => {
     if (!this.userAuthenticated())
       return;
+
     this.props.setActivePin(this.state.modalPin);
-    this.setState(this.defaultState);
+    this.setState(this.defaultState, () => this.navigateToEdit(pinId));
+  }
+
+  navigateToEdit(pinId) {
     this.props.history.push(`/pin/${pinId}/edit`);
   }
 
@@ -122,7 +124,6 @@ class Gallery extends Component {
           pin={this.state.modalPin}
           isOpen={this.state.showModal}
           closeModal={this.closeModal}
-          addDefaultImg={this.addDefaultImg}
           savePin={this.savePin}
           user={this.props.user}
           handleEditClick={this.handleEditClick}

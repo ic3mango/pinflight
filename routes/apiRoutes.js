@@ -33,6 +33,7 @@ router.get('/user/populate', requireLogin, async (req, res, next) => {
   }
 });
 
+// get data on a single pin by id
 router.get('/pin/:id', async (req, res, next) => {
   try {
     res.send(await Pin.findById(req.params.id));
@@ -41,6 +42,7 @@ router.get('/pin/:id', async (req, res, next) => {
   }
 });
 
+// edit pin
 router.post('/pin/:id/edit', requireLogin, async (req, res, next) => {
   try {
     res.json(await Pin.findOneAndUpdate(
@@ -53,6 +55,7 @@ router.post('/pin/:id/edit', requireLogin, async (req, res, next) => {
   }
 });
 
+// either save a pin if it is not in saves array or removes it
 router.post('/pin/:id/save', requireLogin, async (req, res, next) => {
   const saves = req.user.saves.map(obj => obj.toString());
   const operator = saves.includes(req.params.id) ? '$pull': '$addToSet';
@@ -69,6 +72,7 @@ router.post('/pin/:id/save', requireLogin, async (req, res, next) => {
   }
 });
 
+// either hide a pin if it is not in hides array or removes it
 router.post('/pin/:id/hide', requireLogin, async (req, res, next) => {
   const hides = req.user.hides.map(obj => obj.toString());
   const operator = hides.includes(req.params.id) ? '$pull': '$addToSet';
@@ -84,7 +88,8 @@ router.post('/pin/:id/hide', requireLogin, async (req, res, next) => {
   }
 });
 
-router.delete('/pin/:id', async (req, res, next) => {
+// delete a pin by id
+router.delete('/pin/:id', requireLogin, async (req, res, next) => {
   try {
     await Pin.findById(req.params.id).remove().exec();
     res.send(req.params.id);
@@ -93,13 +98,22 @@ router.delete('/pin/:id', async (req, res, next) => {
   }
 });
 
+// create a pin, associate pin with user who created it
 router.post('/pin', requireLogin, async (req, res, next) => {
   req.body.author = req.user._id;
   try {
     const pin = await (new Pin(req.body)).save();
+    const update = {
+      $push: {
+        creates: pin._id,
+      }
+    };
+    if (req.body.like)
+      update["$push"].saves = pin._id;
+
     await User.findByIdAndUpdate(
       req.body.author,
-      { $addToSet: { creates: pin._id } }
+      update
     );
     res.json(pin);
   } catch (err) {
@@ -107,6 +121,7 @@ router.post('/pin', requireLogin, async (req, res, next) => {
   }
 });
 
+// main query route, get data on all pins
 router.get('/pins', async (req, res, next) => {
   try {
     res.send(await Pin.find({}));
@@ -115,6 +130,7 @@ router.get('/pins', async (req, res, next) => {
   }
 });
 
+// get data on all tags
 router.get('/pins/tags', async (req, res, next) => {
   try {
     const pins = await Pin.getTagsList();
@@ -123,7 +139,6 @@ router.get('/pins/tags', async (req, res, next) => {
     next(err);
   }
 });
-
 
 
 module.exports = router;

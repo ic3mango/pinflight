@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactModal from 'react-modal';
+import { EntypoPin } from 'react-entypo'
 
+import fallbackImg from '../assets/images/bombardier_cseries.jpeg';
 import '../assets/styles/PinModal.css';
 
 ReactModal.setAppElement("#root");
@@ -30,7 +32,7 @@ const PinModal = (props) => {
           <img className="rounded mr-3 align-self-center"
             src={pin.imgUrl}
             alt="hopefully a plane"
-            onError={props.addDefaultImg}
+            onError={addDefaultImg}
           />
 
           <div className="media-body">
@@ -45,12 +47,22 @@ const PinModal = (props) => {
       {
         props.user &&
         <div className="modal-footer d-flex justify-content-between">
-          <button onClick={() => props.handleEditClick(pin._id)} className="btn btn-primary">Edit</button>
-          <button onClick={() => props.savePin(pin._id)} className="btn btn-danger">Save</button>
+          <button onClick={() => props.handleEditClick(pin._id)}  className="btn btn-primary">Edit</button>
+          <button onClick={() => props.savePin(pin._id)} className="btn btn-danger">
+            {
+              props.user.saves.map(s => s._id).includes(pin._id.toString()) &&
+              <EntypoPin />
+            }
+            Save
+          </button>
         </div>
       }
     </ReactModal>
   )
+}
+
+const addDefaultImg = (event) => {
+  event.target.src = fallbackImg;
 }
 
 const styles = {
