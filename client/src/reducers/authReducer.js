@@ -2,20 +2,18 @@ import  {
   FETCH_USER,
   FETCH_USER_ALL_DATA,
   SAVE_PIN,
-  HIDE_PIN
+  HIDE_PIN,
+  DELETE_PIN
 } from '../actions/types';
 
 export default function(state = null, action) {
   switch(action.type) {
     case FETCH_USER_ALL_DATA:
-      return action.payload || false;
+      return { ...action.payload };
     case FETCH_USER:
-      return {
-        ...action.payload,
-        saves: action.payload.saves.map(s => ({ _id: s })),
-        hides: action.payload.hides.map(h => ({ _id: h })),
-        creates: action.payload.creates.map(c => ({ _id: c }))
-      };
+      return { ...action.payload };
+    case DELETE_PIN:
+      return { ...state, creates: handleById(state.creates, action.payload )}
     case SAVE_PIN:
       return { ...state, saves: handleById(state.saves, action.payload )}
     case HIDE_PIN:

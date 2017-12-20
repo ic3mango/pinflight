@@ -17,6 +17,10 @@ class Dashboard extends Component {
     this.props.hidePin(id);
   }
 
+  handleDeletePin = (id) => {
+    this.props.deletePin(id);
+  }
+
   render() {
     return (
       <div className="container">
@@ -31,9 +35,13 @@ class Dashboard extends Component {
 
           <div className="media-body">
             <h2 className="mt-0 mb-1">{this.props.user.username}</h2>
-            <div className="d-inline text-danger">{this.props.user.saves.length} saved pins</div>
-            {' '}
-            <div className="d-inline text-secondary">{this.props.user.hides.length} hidden pins</div>
+            <p>
+              <span className="text-primary">{this.props.user.creates.length} created pin</span>
+              {' '}
+              <span className="d-inline text-danger">{this.props.user.saves.length} saved pins</span>
+              {' '}
+              <span className="d-inline text-secondary">{this.props.user.hides.length} hidden pins</span>
+            </p>
           </div>
 
         </div>
@@ -42,8 +50,8 @@ class Dashboard extends Component {
           user={this.props.user}
           handleRemoveSavedPin={this.handleRemoveSavedPin}
           handleUnhidePin={this.handleUnhidePin}
+          handleDeletePin={this.handleDeletePin}
         />
-
       </div>
     );
   }

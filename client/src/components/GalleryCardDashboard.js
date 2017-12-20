@@ -11,7 +11,6 @@ const addDefaultImg = (event) => {
 
 const GalleryCardDashboard = (props) => {
   const pin = props.pin;
-  console.log(pin);
   return (
     <div
       onClick={props.handleAction}

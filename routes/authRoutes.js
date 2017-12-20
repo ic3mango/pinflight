@@ -8,6 +8,7 @@ router.get('/google', passport.authenticate('google', {
   scope: ['profile', 'email']
 }));
 
+// google authenntication callback route
 router.get('/google/callback',
   passport.authenticate('google'),
   (req, res) => {
@@ -15,15 +16,5 @@ router.get('/google/callback',
   }
 );
 
-
-// auth logout
-router.get('/logout', requireLogin, (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
-
-router.get('/user', (req, res) => {
-  res.send(req.user);
-});
 
 module.exports = router;

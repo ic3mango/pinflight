@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 
 import GalleryCardDashboard from './GalleryCardDashboard';
 
-import fallbackImg from '../assets/images/bombardier_cseries.jpeg';
-
 class DashboardGallery extends Component {
   state = {
     tags: ['created', 'saved', 'hidden'],
@@ -36,7 +34,7 @@ class DashboardGallery extends Component {
   generateHiddenText = (activeTag) => {
     switch (activeTag) {
       case 'created':
-        return 'No available action';
+        return 'Click to delete pin forever';
       case 'saved':
         return 'Click to remove';
       case 'hidden':
@@ -49,7 +47,7 @@ class DashboardGallery extends Component {
   generateHandleAction = (activeTag) => {
     switch (activeTag) {
       case 'created':
-        return () => { return }
+        return this.props.handleDeletePin;
       case 'saved':
         return this.props.handleRemoveSavedPin;
       case 'hidden':
@@ -101,7 +99,10 @@ class DashboardGallery extends Component {
 }
 
 DashboardGallery.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  handleDeletePin: PropTypes.func.isRequired,
+  handleUnhidePin: PropTypes.func.isRequired,
+  handleRemoveSavedPin: PropTypes.func.isRequired
 }
 
 export default DashboardGallery;
