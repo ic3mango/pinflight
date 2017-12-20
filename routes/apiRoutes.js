@@ -7,6 +7,24 @@ const router = express.Router();
 
 const requireLogin = require('../middlewares/requireLogin');
 
+// get user info
+router.get('/user', requireLogin, (req, res) => {
+  let user = req.user;
+  res.send({
+    ...user,
+    creates: user.creates.map(c => ({ _id: c })),
+    saves: user.saves.map(s => ({ _id: s })),
+    hides: user.hides.map(h => ({ _id: h }))
+  });
+});
+
+// logout
+router.get('/logout', requireLogin, (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
+// populates user creates, hides, saves fields
 router.get('/user/populate', requireLogin, async (req, res, next) => {
   try {
     res.send(await User.findById(req.user._id).populate("saves hides creates"));
@@ -69,18 +87,17 @@ router.post('/pin/:id/hide', requireLogin, async (req, res, next) => {
 router.delete('/pin/:id', async (req, res, next) => {
   try {
     await Pin.findById(req.params.id).remove().exec();
-    res.send(`pin with id ${id} has been deleted`);
+    res.send(req.params.id);
   } catch (err) {
     next(err);
   }
-
 });
 
 router.post('/pin', requireLogin, async (req, res, next) => {
   req.body.author = req.user._id;
   try {
     const pin = await (new Pin(req.body)).save();
-    User.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       req.body.author,
       { $addToSet: { creates: pin._id } }
     );

@@ -30,4 +30,20 @@ pinSchema.statics.getTagsList = function() {
   ])
 }
 
+pinSchema.pre('remove', function(next) {
+  this.model('User').update(
+    { $or: [
+        { creates: this._id },
+        { saves: this._id },
+        { hides: this._id }
+      ]
+    },
+    { $pull: { creates: this._id },
+      $pull: { saves: this._id },
+      $pull: { hides: this._id }
+    },
+    { multi: true },
+  next);
+})
+
 mongoose.model('Pin', pinSchema);

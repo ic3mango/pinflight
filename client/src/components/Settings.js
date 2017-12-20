@@ -1,8 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux';
 
-const Settings = () =>
-  <div className="">
-    Settings
-  </div>
+const Settings = (props) => {
+  console.table(props.user);
+  return (
+    <div className="container">
+      {props.user && props.user.toString()}
+    </div>
+  )
+}
 
-export default Settings;
+
+function mapStateToProps({ auth}) {
+  return { user: auth }
+}
+
+export default connect(mapStateToProps)(Settings);

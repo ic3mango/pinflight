@@ -5,6 +5,7 @@ import {
   FETCH_PINS,
   FETCH_PIN,
   EDIT_PIN,
+  DELETE_PIN,
   CLEAR_PIN,
   SET_ACTIVE_PIN,
   SAVE_PIN,
@@ -16,7 +17,7 @@ import {
 /* USER */
 
 export const fetchUser = () => async dispatch => {
-  const res = await axios.get('/auth/user');
+  const res = await axios.get('/api/user');
   dispatch({ type: FETCH_USER, payload: res.data });
 }
 
@@ -51,6 +52,11 @@ export const editPin = (id, pin) => async dispatch => {
   dispatch({ type: EDIT_PIN, payload: pin });
   const res = await axios.post(`/api/pin/${id}/edit`, pin);
   dispatch({ type: EDIT_PIN, payload: res.data });
+}
+
+export const deletePin = (id) => async dispatch => {
+  const res = await axios.delete(`/api/pin/${id}`);
+  dispatch({ type: DELETE_PIN, payload: res.data })
 }
 
 /* TAGS ARRAY */

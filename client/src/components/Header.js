@@ -27,7 +27,7 @@ class Header extends Component {
             <Link className="dropdown-item" to="/dashboard">Dashboard</Link>
             <Link className="dropdown-item" to="/settings">Settings</Link>
             <div className="dropdown-divider"></div>
-            <a className="dropdown-item" href="/auth/logout">Logout</a>
+            <a className="dropdown-item" href="/spi/logout">Logout</a>
           </div>
         </div>
       </React.Fragment>
