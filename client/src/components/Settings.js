@@ -5,7 +5,7 @@ const Settings = (props) => {
   console.table(props.user);
   return (
     <div className="container">
-      {props.user && props.user.toString()}
+      {"check console for user information"}
     </div>
   )
 }

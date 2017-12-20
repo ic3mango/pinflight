@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const NavBarTags = (props) => {
-  const colors = props.tagColors || ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark']
+  const colors = props.tagColors || ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light']
   return (
     <nav className="nav justify-content-center">
       {props.tags.map((tag, i) => <button
