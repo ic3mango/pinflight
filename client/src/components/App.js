@@ -25,21 +25,25 @@ class App extends Component {
         <div>
           <Header />
           <section className="container-fluid">
-            <Route exact path="/" component={Landing} />
-            <Route path="/login" component={Login} />
-            <Route path="/gallery" component={Gallery} />
+              {
+                this.props.auth && <React.Fragment>
+                  <Switch>
+                    <Route path="/pin/:id/edit" component={PinEdit} />
+                    <Route path="/pin/:id" component={PinDetail} />
+                    <Route path="/pin/new" component={PinCreate} />
+                  </Switch>
 
-            {
-              this.props.auth && <React.Fragment>
-                <Switch>
-                  <Route path="/pin/new" component={PinCreate} />
-                  <Route path="/pin/:id/edit" component={PinEdit} />
-                  <Route path="/pin/:id" component={PinDetail} />
-                </Switch>
-                <Route path="/dashboard" component={Dashboard} />
-                <Route path="/settings" component={Settings} />
-              </React.Fragment>
-            }
+
+                  <Route path="/dashboard" component={Dashboard} />
+                  <Route path="/settings" component={Settings} />
+
+                </React.Fragment>
+              }
+              <Route path="/login" component={Login} />
+              <Route path="/gallery" component={Gallery} />
+              <Route exact path="/" component={Landing} />
+
+
           </section>
         </div>
       </BrowserRouter>
