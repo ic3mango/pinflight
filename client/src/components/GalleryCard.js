@@ -21,7 +21,7 @@ class GalleryCard extends Component {
   }
 
   copyUrl = (pin) => {
-    const text = `${window.location.origin}/pin/${pin._id}`;
+    const text = `${window.location.origin}/pins/${pin._id}`;
     window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
   }
 
