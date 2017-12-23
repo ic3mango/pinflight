@@ -61,7 +61,7 @@ class Gallery extends Component {
   }
 
   navigateToEdit(pinId) {
-    this.props.history.push(`/pin/${pinId}/edit`);
+    this.props.history.push(`/pins/${pinId}/edit`);
   }
 
   handleTagClick = (activeTag) => {

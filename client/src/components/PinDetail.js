@@ -28,7 +28,7 @@ class PinDetail extends Component {
 
   handleEditClick = (pinId) => {
     this.props.setActivePin(this.props.pin);
-    this.props.history.push(`/pin/${pinId}/edit`);
+    this.props.history.push(`/pins/${pinId}/edit`);
   }
 
   savePin = (pinId) => {

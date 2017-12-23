@@ -53,11 +53,10 @@ class PinForm extends Component {
 
     if (this.props.formType === 'edit') {
       this.props.editPin(this.props.pin._id, this.state);
-      this.props.history.push('/gallery');
-      return;
+    } else {
+      this.props.createPin(this.state);
     }
-
-    this.props.createPin(this.state);
+    
     this.props.history.push('/gallery');
     return;
   }
