@@ -8,14 +8,14 @@ const router = express.Router();
 const requireLogin = require('../middlewares/requireLogin');
 
 // get user info
-router.get('/user', requireLogin, (req, res) => {
+router.get('/users/me', (req, res) => {
   let user = req.user;
-  res.send({
+  res.send(user ? {
     ...user,
     creates: user.creates.map(c => ({ _id: c })),
     saves: user.saves.map(s => ({ _id: s })),
     hides: user.hides.map(h => ({ _id: h }))
-  });
+  } : false);
 });
 
 // logout
@@ -25,7 +25,7 @@ router.get('/logout', requireLogin, (req, res) => {
 });
 
 // populates user creates, hides, saves fields
-router.get('/user/populate', requireLogin, async (req, res, next) => {
+router.get('/users/me/populate', requireLogin, async (req, res, next) => {
   try {
     res.send(await User.findById(req.user._id).populate("saves hides creates"));
   } catch (err) {
@@ -34,7 +34,7 @@ router.get('/user/populate', requireLogin, async (req, res, next) => {
 });
 
 // get data on a single pin by id
-router.get('/pin/:id', async (req, res, next) => {
+router.get('/pins/:id', async (req, res, next) => {
   try {
     res.send(await Pin.findById(req.params.id));
   } catch (err) {
@@ -43,7 +43,7 @@ router.get('/pin/:id', async (req, res, next) => {
 });
 
 // edit pin
-router.post('/pin/:id/edit', requireLogin, async (req, res, next) => {
+router.post('/pins/:id/edit', requireLogin, async (req, res, next) => {
   try {
     res.json(await Pin.findOneAndUpdate(
       { _id: req.params.id },
@@ -56,7 +56,7 @@ router.post('/pin/:id/edit', requireLogin, async (req, res, next) => {
 });
 
 // either save a pin if it is not in saves array or removes it
-router.post('/pin/:id/save', requireLogin, async (req, res, next) => {
+router.post('/pins/:id/save', requireLogin, async (req, res, next) => {
   const saves = req.user.saves.map(obj => obj.toString());
   const operator = saves.includes(req.params.id) ? '$pull': '$addToSet';
   try {
@@ -73,7 +73,7 @@ router.post('/pin/:id/save', requireLogin, async (req, res, next) => {
 });
 
 // either hide a pin if it is not in hides array or removes it
-router.post('/pin/:id/hide', requireLogin, async (req, res, next) => {
+router.post('/pins/:id/hide', requireLogin, async (req, res, next) => {
   const hides = req.user.hides.map(obj => obj.toString());
   const operator = hides.includes(req.params.id) ? '$pull': '$addToSet';
   try {
@@ -89,7 +89,7 @@ router.post('/pin/:id/hide', requireLogin, async (req, res, next) => {
 });
 
 // delete a pin by id
-router.delete('/pin/:id', requireLogin, async (req, res, next) => {
+router.delete('/pins/:id', requireLogin, async (req, res, next) => {
   try {
     await Pin.findById(req.params.id).remove().exec();
     res.send(req.params.id);
@@ -99,7 +99,7 @@ router.delete('/pin/:id', requireLogin, async (req, res, next) => {
 });
 
 // create a pin, associate pin with user who created it
-router.post('/pin', requireLogin, async (req, res, next) => {
+router.post('/pins', requireLogin, async (req, res, next) => {
   req.body.author = req.user._id;
   try {
     const pin = await (new Pin(req.body)).save();

@@ -11,7 +11,7 @@ export default function(state = null, action) {
     case FETCH_USER_ALL_DATA:
       return { ...action.payload };
     case FETCH_USER:
-      return { ...action.payload };
+      return action.payload && { ...action.payload };
     case DELETE_PIN:
       return { ...state, creates: handleById(state.creates, action.payload )}
     case SAVE_PIN:
