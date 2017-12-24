@@ -140,8 +140,8 @@ router.get('/pins', async (req, res, next) => {
 // get data on all tags
 router.get('/pins/tags', async (req, res, next) => {
   try {
-    const pins = await Pin.getTagsList();
-    res.json(pins);
+    const tags = await Pin.getTagsList();
+    res.json(tags);
   } catch (err) {
     next(err);
   }

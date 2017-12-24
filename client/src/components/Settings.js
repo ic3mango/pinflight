@@ -18,9 +18,7 @@ class Settings extends Component {
     const showError = touched && error;
     return (
       <div className="form-group">
-        <label>
-          {field.label}
-        </label>
+        <label>{field.label}</label>
         <input
           {...field.input}
           className={classNames("form-control", { 'border border-danger': showError })}
@@ -31,6 +29,40 @@ class Settings extends Component {
       </div>
     )
   }
+
+  renderTextArea = (field) =>
+    <div className="form-group">
+      <label>{field.label}</label>
+      <textarea
+        {...field.input}
+        className="form-control"
+        rows="3"></textarea>
+    </div>
+
+  renderGenderRadioSelectors = () => {
+    const options = ["Male", "Female", "Others"];
+    return (
+      <div className="form-group">
+        <label className="d-block">Gender</label>
+        {options.map(option =>
+          <div key={option} className="form-check form-check-inline mr-3">
+            <div className="form-check-label">
+              <Field
+                className="form-check-input"
+                name="gender"
+                type="radio"
+                label={option}
+                value={option}
+                component="input"
+              />
+              {option}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
 
   render() {
     const { handleSubmit } = this.props;
@@ -52,9 +84,26 @@ class Settings extends Component {
           label="Avatar"
           component={this.renderField}
         />
+        <Field
+          name="about"
+          label="About"
+          component={this.renderTextArea}
+        />
+        <Field
+          name="location"
+          label="Location"
+          component={this.renderField}
+        />
+        <Field
+          name="website"
+          label="Website"
+          component={this.renderField}
+        />
+        {this.renderGenderRadioSelectors()}
+
         <div className="d-flex">
           <Link to="/dashboard" className="btn btn-danger">Cancel</Link>
-          <button type="submit" className="btn btn-primary ml-auto">Submit</button>
+          <button type="submit" className="btn btn-primary ml-auto">Save</button>
         </div>
       </form>
     )

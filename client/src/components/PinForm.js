@@ -51,13 +51,13 @@ class PinForm extends Component {
       return;
     }
 
+    const nav = () => this.props.history.push('/gallery');
+
     if (this.props.formType === 'edit') {
-      this.props.editPin(this.props.pin._id, this.state);
+      this.props.editPin(this.props.pin._id, this.state, nav);
     } else {
-      this.props.createPin(this.state);
+      this.props.createPin(this.state, nav);
     }
-    
-    this.props.history.push('/gallery');
     return;
   }
 

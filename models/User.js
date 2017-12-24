@@ -17,6 +17,10 @@ const userSchema = new Schema({
       isAsync: false
     }
   },
+  about: String,
+  location: String,
+  website: String,
+  gender: String,
   creates: [
     { type: Schema.ObjectId, ref: 'Pin' }
   ],
