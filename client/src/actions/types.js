@@ -1,5 +1,6 @@
 export const FETCH_USER = 'fetch_user';
 export const FETCH_USER_ALL_DATA = 'fetch_user_all_data';
+export const EDIT_USER = 'edit_user';
 export const FETCH_PINS = 'fetch_pins'
 export const FETCH_PIN = 'fetch_pin';
 export const CREATE_PIN = 'create_pin';

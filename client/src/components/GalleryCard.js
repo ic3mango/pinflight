@@ -1,29 +1,10 @@
 import React, { Component } from 'react'
 import { EntypoPin } from 'react-entypo'
+import { addDefaultCardImg, shareTweet, copyUrl } from '../utils';
 
 import '../assets/styles/GalleryCard.css';
-import fallbackImg from '../assets/images/bombardier_cseries.jpeg';
-
-const addDefaultImg = (event) => {
-  event.target.src = fallbackImg;
-}
-
 
 class GalleryCard extends Component {
-  shareTweet = (pin) => {
-    let url = "https://twitter.com/intent/tweet?hashtags=pinflight"
-    pin.tags.forEach(tag => {
-      url += `,${tag}`;
-    });
-    url += "&related=freecodecamp&text=";
-    url += pin.title;
-    window.open(url);
-  }
-
-  copyUrl = (pin) => {
-    const text = `${window.location.origin}/pins/${pin._id}`;
-    window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
-  }
 
   render() {
     const user = this.props.user;
@@ -39,7 +20,7 @@ class GalleryCard extends Component {
           className="card-img-top"
           src={pin.imgUrl}
           alt="card"
-          onError={addDefaultImg}
+          onError={addDefaultCardImg}
         />
         <div className="card-body">
           <h6 className="card-title">{pin.title}</h6>
@@ -53,8 +34,8 @@ class GalleryCard extends Component {
                 Share
               </button>
               <div className="dropdown-menu" aria-labelledby="shareButtonDropdown">
-                <button className="dropdown-item" onClick={() => this.copyUrl(pin)}>Copy URL</button>
-                <button className="dropdown-item" onClick={() => this.shareTweet(pin)}>Twitter</button>
+                <button className="dropdown-item" onClick={() => copyUrl(pin)}>Copy URL</button>
+                <button className="dropdown-item" onClick={() => shareTweet(pin)}>Twitter</button>
               </div>
           </div>
           </div>

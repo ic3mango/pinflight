@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
   FETCH_USER,
+  EDIT_USER,
   CREATE_PIN,
   FETCH_PINS,
   FETCH_PIN,
@@ -24,6 +25,12 @@ export const fetchUser = () => async dispatch => {
 export const fetchUserAllData = () => async dispatch => {
   const res = await axios.get('/api/users/me/populate');
   dispatch({ type: FETCH_USER_ALL_DATA, payload: res.data });
+}
+
+export const editUser = (userData, nav) => async dispatch => {
+  const res = await axios.post('/api/users/me/edit', userData);
+  nav();
+  dispatch({ type: EDIT_USER, payload: res.data });
 }
 
 export const savePin = (id) => async dispatch => {

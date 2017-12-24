@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { addDefaultAvatar } from '../utils';
 import * as actions from '../actions';
 import DashboardGallery from './DashboardGallery';
 
@@ -30,6 +31,7 @@ class Dashboard extends Component {
 
           <img className="mr-3"
             src={this.props.user.avatar}
+            onError={addDefaultAvatar}
             style={{ width: "200px", height: "200px", borderRadius: "50%" }}
             alt="user avatar"
           />

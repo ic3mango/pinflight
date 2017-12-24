@@ -8,14 +8,8 @@ const router = express.Router();
 const requireLogin = require('../middlewares/requireLogin');
 
 // get user info
-router.get('/users/me', (req, res) => {
-  let user = req.user;
-  res.send(user ? {
-    ...user,
-    creates: user.creates.map(c => ({ _id: c })),
-    saves: user.saves.map(s => ({ _id: s })),
-    hides: user.hides.map(h => ({ _id: h }))
-  } : false);
+router.get('/users/me', requireLogin, (req, res) => {
+  res.send(req.user && req.user);
 });
 
 // logout
@@ -28,6 +22,19 @@ router.get('/logout', requireLogin, (req, res) => {
 router.get('/users/me/populate', requireLogin, async (req, res, next) => {
   try {
     res.send(await User.findById(req.user._id).populate("saves hides creates"));
+  } catch (err) {
+    next(err);
+  }
+});
+
+// edit user data
+router.post('/users/me/edit', requireLogin, async (req, res, next) => {
+  try {
+    res.send(await User.findByIdAndUpdate(
+      req.user._id,
+      req.body,
+      { new: true }
+    ));
   } catch (err) {
     next(err);
   }
