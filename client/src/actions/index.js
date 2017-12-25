@@ -65,7 +65,7 @@ export const editPin = (id, pin, nav) => async dispatch => {
 
 export const deletePin = (id) => async dispatch => {
   const res = await axios.delete(`/api/pins/${id}`);
-  dispatch({ type: DELETE_PIN, payload: res.data })
+  dispatch({ type: DELETE_PIN, payload: id })
 }
 
 /* TAGS ARRAY */

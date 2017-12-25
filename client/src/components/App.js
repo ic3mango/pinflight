@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import RequireAuthentication from './HOC/RequireAuthentication';
+
 import Header from './Header';
 import Landing from './Landing';
 import Login from './Login';
@@ -25,20 +27,16 @@ class App extends Component {
         <div>
           <Header />
           <section className="container-fluid">
-              {
-                this.props.auth && <React.Fragment>
-                  <Switch>
-                    <Route path="/pins/:id/edit" component={PinEdit} />
-                    <Route path="/pins/:id" component={PinDetail} />
-                    <Route path="/pins/new" component={PinCreate} />
-                  </Switch>
+              <Switch>
+                <Route path="/pins/new" component={RequireAuthentication(PinCreate)} />
+                <Route path="/pins/:id/edit" component={RequireAuthentication(PinEdit)} />
+                <Route path="/pins/:id" component={PinDetail} />
+              </Switch>
 
 
-                  <Route path="/dashboard" component={Dashboard} />
-                  <Route path="/settings" component={Settings} />
+              <Route path="/dashboard" component={RequireAuthentication(Dashboard)} />
+              <Route path="/settings" component={RequireAuthentication(Settings)} />
 
-                </React.Fragment>
-              }
               <Route path="/login" component={Login} />
               <Route path="/gallery" component={Gallery} />
               <Route exact path="/" component={Landing} />
