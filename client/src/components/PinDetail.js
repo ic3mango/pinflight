@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import * as actions from '../actions';
 import PinModal from './PinModal';
@@ -74,4 +74,4 @@ const mapStateToProps = ({ selectedPin, auth }) => {
 
 
 
-export default withRouter(connect(mapStateToProps, actions)(PinDetail));
+export default connect(mapStateToProps, actions)(PinDetail);

@@ -1,5 +1,6 @@
 import  {
   FETCH_USER,
+  EDIT_USER,
   FETCH_USER_ALL_DATA,
   SAVE_PIN,
   HIDE_PIN,
@@ -12,6 +13,8 @@ export default function(state = null, action) {
       return { ...action.payload };
     case FETCH_USER:
       return action.payload && { ...action.payload };
+    case EDIT_USER:
+      return { ...action.payload };
     case DELETE_PIN:
       return { ...state, creates: handleById(state.creates, action.payload )}
     case SAVE_PIN:

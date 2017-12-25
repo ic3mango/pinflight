@@ -1,0 +1,138 @@
+/* Landing Page Hero */
+
+.hero {
+  margin: 0 auto;
+  padding: 70px 0;
+  position: relative;
+  min-height: 40vh;
+  height: 500px;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../images/wing-plane-flying-airplane-62623.jpeg) no-repeat #323a40;
+  background-size: cover;
+  background-position: center center;
+  z-index: -1;
+}
+
+.hero-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(77, 77, 77, 0.3);
+}
+
+.hero-punchline {
+  margin: 20px 0;
+}
+
+.hero-punchline span {
+  box-shadow: inset 0 -12px #007bff;
+}
+
+/* landing page navigation items */
+
+.landing-nav {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.landing-nav-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 140px;
+  margin: 0 30px;
+  transform: translateY(-50%);
+}
+
+/* general section stuff */
+
+.section-title {
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  margin: 1rem 50px 2rem 50px;
+  z-index: -1;
+}
+
+.section-title-content {
+  display: inline-block;
+  transform: translateY(50%);
+  font-size: 30px;
+  background-color: #fff;
+  padding: 0 20px;
+  letter-spacing: -.2px;
+}
+
+/* feature section */
+
+.features-wrapper {
+  padding: 40px 0;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.features-gallery-link {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.features-gallery-link a {
+  font-size: 26px;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: inset 0 -6px lightgreen;
+}
+
+.features-gallery-link a:hover {
+  transform: scale(1.1);
+  color: #007ff8;
+  text-shadow: 0.5px 1px #007ff8;
+}
+
+.feature {
+  padding: 40px 10px 0 10px;
+  width: 350px;
+  flex: 0 0 auto;
+}
+
+.feature-icon {
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+/* comments section */
+.comments-wrapper {
+  padding: 40px 0;
+}
+
+.media img {
+  width: 88px;
+  height: 88px;
+  border: 2px solid #f22145;
+  border-radius: 50%;
+}
+
+.media h5 {
+  font-weight: 700;
+}

@@ -6,6 +6,7 @@ import reduxThunk from 'redux-thunk';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import './assets/styles/index.css';
 
 import App from './components/App';
 import rootReducer from './reducers';

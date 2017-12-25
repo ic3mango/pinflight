@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
   FETCH_USER,
+  EDIT_USER,
   CREATE_PIN,
   FETCH_PINS,
   FETCH_PIN,
@@ -26,6 +27,12 @@ export const fetchUserAllData = () => async dispatch => {
   dispatch({ type: FETCH_USER_ALL_DATA, payload: res.data });
 }
 
+export const editUser = (userData, nav) => async dispatch => {
+  const res = await axios.post('/api/users/me/edit', userData);
+  nav();
+  dispatch({ type: EDIT_USER, payload: res.data });
+}
+
 export const savePin = (id) => async dispatch => {
   const res = await axios.post(`/api/pins/${id}/save`);
   dispatch({ type: SAVE_PIN, payload: res.data })
@@ -38,8 +45,9 @@ export const hidePin = (id) => async dispatch => {
 
 /* PINS ARRAY */
 
-export const createPin = (pin) => async dispatch => {
+export const createPin = (pin, nav) => async dispatch => {
   const res = await axios.post('/api/pins', pin);
+  nav();
   dispatch({ type: CREATE_PIN, payload: res.data });
 }
 
@@ -48,9 +56,10 @@ export const fetchPins = () => async dispatch => {
   dispatch({ type: FETCH_PINS, payload: res.data });
 }
 
-export const editPin = (id, pin) => async dispatch => {
+export const editPin = (id, pin, nav) => async dispatch => {
   dispatch({ type: EDIT_PIN, payload: pin });
   const res = await axios.post(`/api/pins/${id}/edit`, pin);
+  nav();
   dispatch({ type: EDIT_PIN, payload: res.data });
 }
 

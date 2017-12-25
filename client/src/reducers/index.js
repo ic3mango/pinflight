@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as form } from 'redux-form'
 
 import auth from './authReducer';
 import pins from './pinsReducer';
@@ -9,5 +10,6 @@ export default combineReducers({
   tags,
   auth,
   pins,
-  selectedPin
+  selectedPin,
+  form
 });
