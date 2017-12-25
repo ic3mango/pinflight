@@ -14,7 +14,8 @@ class PinDetail extends Component {
 
   componentDidMount() {
     if (!this.props.pin) {
-      this.props.fetchPin(this.props.match.params.id);
+      const { id } = this.props.match.params;
+      this.props.fetchPin(id);
     }
   }
 
@@ -68,8 +69,8 @@ class PinDetail extends Component {
   }
 }
 
-const mapStateToProps = ({ selectedPin, auth }) => {
-  return { pin: selectedPin, user: auth }
+const mapStateToProps = ({ pins, auth }, ownProps) => {
+  return { pin: pins[ownProps.match.params.id], user: auth }
 }
 
 

@@ -141,7 +141,7 @@ const Landing = () => {
           <div className="row">
 
             <div className="col-xs-12 col-sm my-3">
-              <div className="media">
+              <div className="media comment">
                 <img className="mr-3" src="https://randomuser.me/api/portraits/men/57.jpg" alt="user"/>
                 <div className="media-body">
                   Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis ...
@@ -152,7 +152,7 @@ const Landing = () => {
             </div>
 
             <div className="col-xs-12 col-sm my-3">
-              <div className="media">
+              <div className="media comment">
                 <img className="mr-3" src="https://randomuser.me/api/portraits/men/12.jpg" alt="user"/>
                 <div className="media-body">
                   Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis ...
@@ -166,7 +166,7 @@ const Landing = () => {
           <div className="row">
 
             <div className="col-xs-12 col-sm my-3">
-              <div className="media">
+              <div className="media comment">
                 <img className="mr-3" src="https://randomuser.me/api/portraits/women/17.jpg" alt="user"/>
                 <div className="media-body">
                   Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis ...
@@ -177,7 +177,7 @@ const Landing = () => {
             </div>
 
             <div className="col-xs-12 col-sm my-3">
-              <div className="media">
+              <div className="media comment">
                 <img className="mr-3" src="https://randomuser.me/api/portraits/men/89.jpg" alt="user"/>
                 <div className="media-body">
                   Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis ...
@@ -191,7 +191,7 @@ const Landing = () => {
           <div className="row">
 
             <div className="col-xs-12 col-sm my-3">
-              <div className="media">
+              <div className="media comment">
                 <img className="mr-3" src="https://randomuser.me/api/portraits/women/58.jpg" alt="user"/>
                 <div className="media-body">
                   Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis ...
@@ -202,7 +202,7 @@ const Landing = () => {
             </div>
 
             <div className="col-xs-12 col-sm my-3">
-              <div className="media">
+              <div className="media comment">
                 <img className="mr-3" src="https://randomuser.me/api/portraits/women/69.jpg" alt="user"/>
                 <div className="media-body">
                   Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis ...

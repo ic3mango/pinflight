@@ -126,13 +126,13 @@
   padding: 40px 0;
 }
 
-.media img {
+.comment img {
   width: 88px;
   height: 88px;
   border: 2px solid #f22145;
   border-radius: 50%;
 }
 
-.media h5 {
+.comment h5 {
   font-weight: 700;
 }
