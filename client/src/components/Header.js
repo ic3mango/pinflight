@@ -10,7 +10,7 @@ class Header extends Component {
   // header is not responsive, fix soon
   renderContent() {
     if (this.props.auth === null)
-      return <div>
+      return <div className="d-flex">
         <Link className="nav-item nav-link" to="/gallery">Gallery</Link>
         <a className="nav-item nav-link" href="/auth/google">Login with google</a>
       </div>
