@@ -68,6 +68,7 @@ class DashboardGallery extends Component {
     const handleAction = this.generateHandleAction(this.state.activeTag);
 
     return (
+
       <div>
         <NavBarTags
           tags={this.state.tags}

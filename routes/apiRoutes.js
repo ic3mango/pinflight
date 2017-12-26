@@ -40,6 +40,29 @@ router.post('/users/me/edit', requireLogin, async (req, res, next) => {
   }
 });
 
+// create a pin, associate pin with user who created it
+router.post('/pins', requireLogin, async (req, res, next) => {
+  req.body.author = req.user._id;
+  try {
+    const pin = await (new Pin(req.body)).save();
+    const update = {
+      $push: {
+        creates: pin._id,
+      }
+    };
+    if (req.body.save)
+      update["$push"].saves = pin._id;
+
+    await User.findByIdAndUpdate(
+      req.body.author,
+      update
+    );
+    res.json(pin);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // get data on a single pin by id
 router.get('/pins/:id', async (req, res, next) => {
   try {
@@ -105,40 +128,29 @@ router.delete('/pins/:id', requireLogin, async (req, res, next) => {
   }
 });
 
-// create a pin, associate pin with user who created it
-router.post('/pins', requireLogin, async (req, res, next) => {
-  req.body.author = req.user._id;
+// main query route, get data on all pins
+router.get('/pins', async (req, res, next) => {
   try {
-    const pin = await (new Pin(req.body)).save();
-    const update = {
-      $push: {
-        creates: pin._id,
-      }
-    };
-    if (req.body.like)
-      update["$push"].saves = pin._id;
-
-    await User.findByIdAndUpdate(
-      req.body.author,
-      update
-    );
-    res.json(pin);
+    res.send(await Pin.find({}).sort({ updatedAt: -1 }).limit(100));
   } catch (err) {
     next(err);
   }
 });
 
-// main query route, get data on all pins
-router.get('/pins', async (req, res, next) => {
+// perform text search on Pin model
+router.get('/pins/search/:text', async (req, res, next) => {
   try {
-    res.send(await Pin.find({}));
+    const pins = await Pin.find({
+      $text: { $search: req.params.text }
+    }).sort({ updatedAt: -1 }).limit(100);
+    res.json(pins);
   } catch (err) {
     next(err);
   }
 });
 
 // get data on all tags
-router.get('/pins/tags', async (req, res, next) => {
+router.get('/pins/meta/tags', async (req, res, next) => {
   try {
     const tags = await Pin.getTagsList();
     res.json(tags);

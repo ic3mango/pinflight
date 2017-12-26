@@ -121,9 +121,7 @@ function validate(values) {
   return errors;
 }
 
-
-function mapStateToProps({ auth}) {
-
+const mapStateToProps = ({ auth }) => {
   return { initialValues: auth }
 }
 
