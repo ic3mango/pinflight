@@ -24,6 +24,8 @@ class Dashboard extends Component {
   }
 
   render() {
+    if (!this.props.user || typeof this.props.user.creates[0] === "string")
+      return <div className="">Loading user data...</div>
     return (
       <div className="container">
 
@@ -47,7 +49,7 @@ class Dashboard extends Component {
               <span className="d-inline text-secondary">{this.props.user.hides.length} hidden pins</span>
             </p>
 
-            <Link className="badge badge-primary p-2 text-uppercase" to="/pin/new">Create Pin</Link>
+            <Link className="badge badge-primary p-3 text-uppercase" to="/pins/new">Create Pin</Link>
           </div>
 
         </div>
@@ -63,8 +65,6 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => ({
-  user: auth
-});
+const mapStateToProps = ({ auth }) => ({ user: auth });
 
 export default connect(mapStateToProps, actions)(Dashboard);

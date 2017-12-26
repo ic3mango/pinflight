@@ -12,7 +12,12 @@ export default function(state = null, action) {
     case FETCH_USER_ALL_DATA:
       return { ...action.payload };
     case FETCH_USER:
-      return action.payload && { ...action.payload };
+      return action.payload && 
+      { ...action.payload,
+        creates: action.payload.creates.map(toObjId),
+        saves: action.payload.saves.map(toObjId),
+        hides: action.payload.hides.map(toObjId),
+      };
     case EDIT_USER:
       return { ...action.payload };
     case DELETE_PIN:
@@ -24,6 +29,10 @@ export default function(state = null, action) {
     default:
       return state;
   }
+}
+
+function toObjId(string) {
+  return { _id: string };
 }
 
 function handleById(array, id) {

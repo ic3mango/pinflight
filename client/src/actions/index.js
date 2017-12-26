@@ -13,6 +13,7 @@ import {
   HIDE_PIN,
   FETCH_TAGS,
   FETCH_USER_ALL_DATA,
+  SEARCH_TEXT_PINS
 } from './types';
 
 /* USER */
@@ -64,14 +65,20 @@ export const editPin = (id, pin, nav) => async dispatch => {
 }
 
 export const deletePin = (id) => async dispatch => {
-  const res = await axios.delete(`/api/pins/${id}`);
+  await axios.delete(`/api/pins/${id}`);
   dispatch({ type: DELETE_PIN, payload: id })
+}
+
+export const searchTextPins = (text, nav) => async dispatch => {
+  const res = await axios.get(`/api/pins/search/${text}`);
+  nav();
+  dispatch({ type: SEARCH_TEXT_PINS, payload: res.data });
 }
 
 /* TAGS ARRAY */
 
 export const fetchTags = () => async dispatch => {
-  const res = await axios.get('/api/pins/tags');
+  const res = await axios.get('/api/pins/meta/tags');
   dispatch({ type: FETCH_TAGS, payload: res.data });
 }
 

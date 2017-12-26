@@ -31,6 +31,7 @@ pinSchema.statics.getTagsList = function() {
 }
 
 pinSchema.pre('remove', function(next) {
+  // doesn't seem to be working yet
   this.model('User').update(
     { $or: [
         { creates: this._id },
@@ -43,7 +44,11 @@ pinSchema.pre('remove', function(next) {
       $pull: { hides: this._id }
     },
     { multi: true },
-  next);
-})
+    next
+  );
+});
+
+// create indexes for text search
+pinSchema.index({ title: 'text', description: 'text', tags: 'text' });
 
 mongoose.model('Pin', pinSchema);

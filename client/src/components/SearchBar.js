@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -15,9 +16,14 @@ class SearchBar extends Component {
     });
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.handleSearch(this.state.text, () => this.props.history.push('/gallery'));
+  }
+
   render() {
     return (
-      <form className="form-inline my-2 my-lg-0">
+      <form onSubmit={this.handleSubmit} className="form-inline ml-auto search-bar">
         <input
           className="form-control mr-sm-2"
           type="search"
@@ -27,11 +33,11 @@ class SearchBar extends Component {
           placeholder="Boeing 747"
         />
         <button className="btn btn-outline-primary" type="submit">
-          Seach
+          Search
         </button>
       </form>
     )
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

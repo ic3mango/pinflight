@@ -11,3 +11,4 @@ export const SET_ACTIVE_PIN = 'set_active_pin';
 export const SAVE_PIN = 'save_pin';
 export const HIDE_PIN = 'hide_pin';
 export const FETCH_TAGS = 'fetch_tags';
+export const SEARCH_TEXT_PINS = 'search_text_pins';

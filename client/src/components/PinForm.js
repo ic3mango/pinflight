@@ -17,7 +17,7 @@ class PinForm extends Component {
       imgUrl: '',
       description: '',
       tags: [],
-      like: true,
+      save: true,
     }
   }
 
@@ -125,11 +125,11 @@ class PinForm extends Component {
             <label className="form-check-label">
               <input
                 onChange={this.onChange}
-                name="like"
+                name="save"
                 type="checkbox"
-                checked={this.state.like}
+                checked={this.state.save}
                 className="form-check-input" />
-              automatically like created pin
+              automatically save created pin
             </label>
           </div>
         }

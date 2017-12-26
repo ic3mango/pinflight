@@ -90,7 +90,7 @@ class Gallery extends Component {
 
     const hides = (this.props.user && this.props.user.hides) || [];
     let tags = this.props.tags || [];
-    if (tags.length && tags[0]._id != 'all') {
+    if (tags.length && tags[0]._id !== 'all') {
       tags.unshift({ _id: 'all', count: tags.reduce((acc, cur) => acc + cur.count, 0)});
     }
 
