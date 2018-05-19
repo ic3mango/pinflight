@@ -13,4 +13,4 @@ Deployed on heroku at  [PinFlight](https://pinflight.herokuapp.com/gallery)
 <img src="screenshots/info.png" alt="info" width="250">
 
 ## License
-PinFlight is Copyright © 2017 Stefan Jiang. It is free software, and may be redistributed without restriction.s
+PinFlight is Copyright © 2017 Stefan Jiang. It is free software, and may be redistributed without restrictions.
