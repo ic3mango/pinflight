@@ -1,10 +1,8 @@
 # Pinflight
-PinFlight is a Pinterest clone which allows users to upload flight related images to the gallery.  
-Uploaded images will be viewable by all visitors of the site.  
-Logged in users have additional functionalities unlocked - uploading images, editing images, hiding images from gallery.
+Pinterest clone for aeronautics pictures.
 
-## Visit
-Deployed on heroku at  [PinFlight](https://pinflight.herokuapp.com/gallery)
+## Url
+https://pinflight.herokuapp.com/gallery
 
 
 ## Screenshots
